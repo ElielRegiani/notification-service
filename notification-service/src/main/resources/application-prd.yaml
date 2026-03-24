@@ -2,23 +2,23 @@ spring:
   application:
     name: notification-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/notificationdb
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://<PROD_DB_HOST>:5432/notificationdb
+    username: <PROD_DB_USER>
+    password: <PROD_DB_PASSWORD>
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: validate
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: <PROD_KAFKA_BROKER>:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      group-id: notification-service
+      group-id: notification-service-prd
